@@ -16,11 +16,12 @@ public class Main {
         input - (abcd)
         output - (dcba)
         * */
-        Arrays.asList(new String[]{"abcd(efg)hijk", "a(123)(456789)(8989)(1111)", "abcd(efg)hijk(lmn)opq","(abcd)","abcd"}).stream().forEach(
+        Arrays.asList(new String[]{"abcd(efg)hijk", "a(123)(456789)(8989)(1111)", "abcd(efg)hijk(lmn)opq","(abcd)","abcd","(123456789)"}).stream().forEach(
                 e -> {
                     char[] string = e.toCharArray();
                     int left = 0;
                     if (string.length >= 3) {
+                        mainloop:
                         while (left < string.length - 2) {
                             if (string[left] == '(') {
                                 int right = left + 1;
@@ -40,6 +41,7 @@ public class Main {
                                     }
                                     System.out.println(left + " " + right);
                                     left = right - 1;
+                                    continue  mainloop;
                                 }
                             }
                             left++;
